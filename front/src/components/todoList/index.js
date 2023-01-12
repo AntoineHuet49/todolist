@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import ButtonAdd from "../addTask/buttonAdd";
+import ButtonAdd from "./buttonAdd";
 
 function TodoList() {
     // state
@@ -20,14 +20,14 @@ function TodoList() {
     // render
     return (
         <div className="flex items-center flex-col">
-            <h1 className="text-3xl">TodoList</h1>
+            <h1 className="text-3xl m-4">TodoList</h1>
             <ButtonAdd />
             {task.map((task) => 
             <div key={task.id} className="flex justify-center w-3/4 border border-black border-solid rounded h-8 items-center my-3">
                 <p className="grow text-center">{task.body}</p>
                 <div className="flex h-full">
-                    <button className="px-2 block h-full border-l border-black">edit</button>
-                    <button className="px-2 block h-full border-l border-black">delete</button>
+                    <button className="px-2 block h-full border-l border-black"><span class="material-symbols-outlined">edit</span></button>
+                    <button className="px-2 block h-full border-l border-black"><span class="material-symbols-outlined">delete</span></button>
                 </div>
             </div>
             )}

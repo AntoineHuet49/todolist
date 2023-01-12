@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className='bg-[#BB9457] h-screen m-0'>
+    <div className='bg-[#FFE6A7] h-screen m-0 font-sans'>
       <TodoList />
     </div>
   )
