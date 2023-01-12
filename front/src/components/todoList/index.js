@@ -10,18 +10,18 @@ function TodoList() {
     useEffect(() => {
         axios.get('http://localhost:8080/api/tasks')
         .then((response) => {
-            setTask(response.data.tasks);
+            setTask(response.data);
         })
         .catch((error) => {
             console.log(error);
         });
-    }, []);
+    }, [task]);
 
     // render
     return (
         <div className="flex items-center flex-col">
             <h1 className="text-3xl m-4">TodoList</h1>
-            <ButtonAdd />
+            <ButtonAdd stateChanger={setTask}/>
             {task.map((task) => 
             <div key={task.id} className="flex justify-center w-3/4 border border-black border-solid rounded h-8 items-center my-3">
                 <p className="grow text-center">{task.body}</p>

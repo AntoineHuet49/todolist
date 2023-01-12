@@ -22,10 +22,17 @@ function ButtonAdd() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post()
-
-        setShow(false);
-        setNewTask('');
+        axios.post('http://localhost:8080/api/tasks', {
+            body: newTask
+        })
+        .then((response) => {
+            console.log(response);
+            setShow(false);
+            setNewTask('');
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     };
 
     // Modal
