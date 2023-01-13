@@ -1,14 +1,16 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-function ButtonEdit() {
+function ButtonEdit(props) {
     // state
 
     // comportement
+    const handleClickEdit = (e) => {
+        props.toggleShowInput()
+    }
 
     // render
     return (
-        <button className="px-2 block h-full border-l border-black"><span class="material-symbols-outlined">edit</span></button>
+        <button onClick={handleClickEdit} className="px-2 block h-full border-l border-black"><span className="material-symbols-outlined">edit</span></button>
     )
 }
 

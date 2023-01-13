@@ -57,4 +57,23 @@ class TaskController extends AbstractController
             $taskEdited
         );
     }
+
+    #[Route("/api/tasks/{id<\d+>}", name: "api_tasks_delete", methods: ["DELETE"])]
+    public function delete(int $id, TaskRepository $taskRepository): JsonResponse
+    {
+        $taskToDelete = $taskRepository->find($id);
+
+        if ($taskToDelete === null) {
+            return $this->json(
+                "Cette tache n'existe pas",
+                Response::HTTP_NOT_FOUND
+            );
+        }
+
+        $taskRepository->remove($taskToDelete, true);
+
+        return $this->json(
+            "La tache a bien été supprimé"
+        );
+    }
 }
