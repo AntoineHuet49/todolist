@@ -37,24 +37,16 @@ function Task(props) {
         })
     }
 
-    // cacher l'input d'edition lors d'un clique ailleurs
-    // const editInput = document.getElementById("editInput");
-    
-    // const handleClickDocument = ((e) => {
-    //     console.log(showInput);
-    //     if (e.target !== editInput && showInput === true) {
-    //         setShowInput(false);
-    //     }
-    // });
-    
-    // document.addEventListener("focus", handleClickDocument);
-    // render
+    const handleBlurEditInput = (e) => {
+        setShowInput(false);
+    }
+
     return (
             <div className="flex justify-center w-3/4 border border-black border-solid rounded h-8 items-center my-3">
 
                 {showInput ? 
                 <form onSubmit={handleSubmitEdit} className="grow h-full rounded-l-sm flex" >
-                    <input id="editInput" value={taskEdited.body} onChange={handleChangeInputEdit} className="grow h-full rounded-l-sm text-center" autoFocus /> 
+                    <input id="editInput" value={taskEdited.body} onChange={handleChangeInputEdit} onBlur={handleBlurEditInput} className="grow h-full rounded-l-sm text-center" autoFocus /> 
                     <button type="submit" className="bg-white border-l border-solid border-black px-1"><span className="material-symbols-outlined">done</span></button>
                 </form>
                 : <p className="grow text-center">{task.body}</p>}
