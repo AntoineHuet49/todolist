@@ -9,9 +9,15 @@ function TodoList() {
     const [tasks, setTasks] = useState([]);
     const [show, setShow] = useState(false);
 
+    const token = localStorage.getItem('token')
+
     // comportement
     useEffect(() => {
-        axios.get('http://localhost:8080/api/tasks')
+        axios.get('http://localhost:8080/api/tasks', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {
             setTasks(response.data);
         })

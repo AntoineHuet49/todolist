@@ -4,6 +4,7 @@ import './App.css';
 import {Route, Routes} from 'react-router-dom';
 import Subscribe from './components/subscribe';
 import Login from './components/login';
+import PrivateRoutes from './utils/privateRoutes';
 
 
 function App() {
@@ -12,7 +13,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Subscribe />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/todolist' element={<TodoList />} />
+
+        <Route element={<PrivateRoutes />} >
+          <Route path='/todolist' element={<TodoList />} />
+        </Route>
       </Routes>
     </div>
   )

@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
     // state
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
 
+    const navigate = useNavigate();
     // function
     const handleChangeEmail = (e) => {
         setEmail(e.target.value)
@@ -24,8 +25,8 @@ function Login() {
             "password": password
         })
         .then((response) => {
-            console.log(response.data.token);
             localStorage.setItem("token", response.data.token);
+            navigate("/todolist");
         })
         .catch((error) => {
             console.log(error);
