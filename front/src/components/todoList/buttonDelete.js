@@ -3,12 +3,17 @@ import React from "react";
 
 function ButtonDelete(props) {
     // state
+    const token = localStorage.getItem('token');
 
     // function
     const handleClickDelete = (e) => {
         const taskId = props.task.id;
 
-        axios.delete('http://localhost:8080/api/tasks/' + taskId)
+        axios.delete('http://localhost:8080/api/tasks/' + taskId, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {})
         .catch((error) => {
             console.log(error);

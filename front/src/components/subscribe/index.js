@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Subscribe() {
     // state
@@ -9,6 +9,8 @@ function Subscribe() {
     const [passwordVerification, setPasswordVerification] = useState([]);
     const [lastname, setLastname] = useState([]);
     const [firstname, setFirstname] = useState([]);
+
+    const navigate = useNavigate();
 
     // function
     const handleChangeEmail = (e) => {
@@ -42,10 +44,11 @@ function Subscribe() {
             "firstname": firstname,
         })
         .then((response) => {
-            console.log(response);
+            navigate("/login");
         })
         .catch((error) => {
             console.log(error);
+            navigate("/");
         });
     }
 

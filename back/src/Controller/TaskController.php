@@ -14,28 +14,61 @@ use Symfony\Component\Serializer\SerializerInterface as SerializerSerializerInte
 
 class TaskController extends AbstractController
 {
+    /**
+     * find all task
+     *
+     * @param TaskRepository $taskRepository
+     * @return JsonResponse
+     */
     #[Route('/api/tasks', name: 'api_tasks_browse', methods: ['GET'])]
     public function browse(TaskRepository $taskRepository): JsonResponse
     {
+        $user = $this->getUser();
+
         return $this->json(
-            $taskRepository->findAll()
+            $taskRepository->findBy(["user" => $user]),
+            Response::HTTP_OK,
+            [],
+            ["groups" => "browse_task"]
         );
     }
 
+    /**
+     * add one task to DB
+     *
+     * @param TaskRepository $taskRepository
+     * @param Request $request
+     * @param SerializerSerializerInterface $serializerInterface
+     * @return JsonResponse
+     */
     #[Route("/api/tasks", name: "api_tasks_add", methods: ["POST"])]
     public function add(TaskRepository $taskRepository, Request $request, SerializerSerializerInterface $serializerInterface): JsonResponse
     {
+        $user = $this->getUser();
         $content = $request->getContent();
 
         $newTask = $serializerInterface->deserialize($content, Task::class, 'json');
+        $newTask->setUser($user);
 
         $taskRepository->save($newTask, true);
 
         return $this->json(
-            $newTask
+            $newTask,
+            Response::HTTP_OK,
+            [],
+            ["groups" => "add_task"]
         );
     }
 
+    /**
+     * edit one task on DB
+     * 
+     * @param int $id
+     * @param Request $request
+     * @param TaskRepository $taskRepository
+     * @param SerializerSerializerInterface $serializerInterface
+     * @return JsonResponse
+     */
     #[Route("/api/tasks/{id<\d+>}", name: "api_tasks_edit", methods: ["PUT"])]
     public function edit(int $id, Request $request, TaskRepository $taskRepository, SerializerSerializerInterface $serializerInterface): JsonResponse
     {
@@ -54,10 +87,20 @@ class TaskController extends AbstractController
         $taskRepository->save($taskEdited, true);
 
         return $this->json(
-            $taskEdited
+            $taskEdited,
+            Response::HTTP_OK,
+            [],
+            ['groups' => 'edit_task']
         );
     }
 
+    /**
+     * delete one task on DB
+     * 
+     * @param int $id
+     * @param TaskRepository $taskRepository
+     * @return  JsoneResponse
+     */
     #[Route("/api/tasks/{id<\d+>}", name: "api_tasks_delete", methods: ["DELETE"])]
     public function delete(int $id, TaskRepository $taskRepository): JsonResponse
     {

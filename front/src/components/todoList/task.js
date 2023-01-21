@@ -6,10 +6,10 @@ import ButtonEdit from "./buttonEdit";
 function Task(props) {
     // state
     const [showInput, setShowInput] = useState(false);
-    
     const [task, setTask] = useState(props.task);
-    
     const [taskEdited, setTaskEdited] = useState(task);
+
+    const token = localStorage.getItem('token');
     
     // function
     const toggleShowInput = () => {setShowInput(showInput => !showInput)};
@@ -24,7 +24,10 @@ function Task(props) {
         const taskId = task.id;
 
         axios.put('http://localhost:8080/api/tasks/' + taskId, {
-            body: taskEdited
+            body: taskEdited,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         })
         .then((response) => {
             toggleShowInput();

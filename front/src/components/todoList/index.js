@@ -3,6 +3,7 @@ import axios from 'axios';
 import ButtonAdd from "./buttonAdd";
 import Modal from "./modal";
 import Task from "./task";
+import ButtonLogout from "../logout/buttonLogout";
 
 function TodoList() {
     // state
@@ -28,7 +29,10 @@ function TodoList() {
 
     // render
     return (
-        <div className="flex items-center flex-col">
+        <div className="flex items-center flex-col static">
+
+            <ButtonLogout className="absolute right-3 top-3" />
+
             <h1 className="text-3xl m-4">TodoList</h1>
 
             <ButtonAdd setShow={setShow} show={show} />

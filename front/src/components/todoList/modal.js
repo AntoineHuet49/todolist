@@ -5,6 +5,8 @@ function Modal(props) {
     // state
     const [newTask, setNewTask] = useState([]);
 
+    const token = localStorage.getItem('token');
+
     // comportement
     const handleClose = () => {
         props.setShow(false);
@@ -18,7 +20,12 @@ function Modal(props) {
         e.preventDefault();
 
         axios.post('http://localhost:8080/api/tasks', {
-            body: newTask
+            body: newTask,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         })
         .then((response) => {
             props.setShow(false);
