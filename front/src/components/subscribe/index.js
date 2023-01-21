@@ -11,6 +11,7 @@ function Subscribe() {
     const [firstname, setFirstname] = useState([]);
 
     const navigate = useNavigate();
+    const token = localStorage.getItem('token');
 
     // function
     const handleChangeEmail = (e) => {
@@ -52,6 +53,20 @@ function Subscribe() {
         });
     }
 
+    const checkToken = () => {
+        axios.get('http://localhost:8080/api/checktoken', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then((response) => {
+            navigate("/todolist");
+        })
+        .catch((error) => {
+        })
+      }
+
+    checkToken();
     // render
     return (
         <div className="w-full h-screen flex flex-col justify-center items-center">

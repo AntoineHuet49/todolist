@@ -6,8 +6,8 @@ import Subscribe from './components/subscribe';
 import Login from './components/login';
 import PrivateRoutes from './utils/privateRoutes';
 
-
 function App() {
+  // render
   return (
     <div className='bg-[#FFE6A7] h-screen m-0 font-sans'>
       <Routes>

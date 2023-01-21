@@ -16,6 +16,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class UserController extends AbstractController
 {
+    /**
+     * subscribe one user
+     *
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @param SerializerInterface $serializerInterface
+     * @param UserPasswordHasherInterface $passwordHasherInterface
+     * @return JsonResponse
+     */
     #[Route('/api/subscribe', name: 'api_user_subscribe', methods: ["POST"])]
     public function subscribe(Request $request, UserRepository $userRepository, SerializerInterface $serializerInterface, UserPasswordHasherInterface $passwordHasherInterface): JsonResponse
     {
@@ -49,6 +58,14 @@ class UserController extends AbstractController
 
         return $this->json(
             "L'utilisateur a bien été enrengistré"
+        );
+    }
+
+    #[Route('/api/checktoken', name: 'api_user_checkToken', methods: ["GET"])]
+    public function checkToken(): JsonResponse
+    {
+        return $this->json(
+            true
         );
     }
 }

@@ -25,6 +25,8 @@ function Task(props) {
 
         axios.put('http://localhost:8080/api/tasks/' + taskId, {
             body: taskEdited,
+        },
+        {
             headers: {
                 Authorization: `Bearer ${token}`
             }
