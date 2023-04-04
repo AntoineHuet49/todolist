@@ -14,7 +14,7 @@ function TodoList() {
 
     // comportement
     useEffect(() => {
-        axios.get('http://localhost:8080/api/tasks', {
+        axios.get(process.env.REACT_APP_API_LINK + '/api/tasks', {
             headers: {
                 Authorization: `Bearer ${token}`
             }

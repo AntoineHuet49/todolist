@@ -37,7 +37,7 @@ function Subscribe() {
     const handleSubmitSubscribeForm = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8080/api/subscribe', {
+        axios.post(process.env.REACT_APP_API_LINK + '/api/subscribe', {
             "email": email,
             "password": password,
             "passwordVerification": passwordVerification,
@@ -54,7 +54,7 @@ function Subscribe() {
     }
 
     const checkToken = () => {
-        axios.get('http://localhost:8080/api/checktoken', {
+        axios.get(process.env.REACT_APP_API_LINK + '/api/checktoken', {
           headers: {
             Authorization: `Bearer ${token}`
           }

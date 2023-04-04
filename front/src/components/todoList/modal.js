@@ -19,7 +19,7 @@ function Modal(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8080/api/tasks', {
+        axios.post(process.env.REACT_APP_API_LINK + '/api/tasks', {
             body: newTask,
         },
         {

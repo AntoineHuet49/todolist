@@ -20,7 +20,7 @@ function Login() {
     const handleSubmitLoginForm = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8080/api/login_check', {
+        axios.post(process.env.REACT_APP_API_LINK + '/api/login_check', {
             "username": email,
             "password": password
         })

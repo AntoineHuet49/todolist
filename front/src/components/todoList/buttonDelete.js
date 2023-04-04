@@ -9,7 +9,7 @@ function ButtonDelete(props) {
     const handleClickDelete = (e) => {
         const taskId = props.task.id;
 
-        axios.delete('http://localhost:8080/api/tasks/' + taskId, {
+        axios.delete(process.env.REACT_APP_API_LINK +'/api/tasks/' + taskId, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

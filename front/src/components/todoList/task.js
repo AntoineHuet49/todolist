@@ -23,7 +23,7 @@ function Task(props) {
 
         const taskId = task.id;
 
-        axios.put('http://localhost:8080/api/tasks/' + taskId, {
+        axios.put(process.env.REACT_APP_API_LINK + '/api/tasks/' + taskId, {
             body: taskEdited,
         },
         {
