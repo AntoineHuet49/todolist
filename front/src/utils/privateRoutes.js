@@ -28,7 +28,7 @@ const PrivateRoutes = () => {
 
   return (
     <div>
-        {userAuth ? <Outlet  /> : <Navigate to="/login" />};
+        {userAuth ? <Outlet  /> : <Navigate to="/login" />}
     </div>
 
 )

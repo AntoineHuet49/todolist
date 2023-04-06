@@ -46,27 +46,30 @@ function Task(props) {
         setShowInput(false);
     }
 
-    return (
-            <div className="flex justify-center w-3/4 border border-black border-solid rounded h-8 items-center my-3">
+    const handleDeleteTask = (e) => {
+        props.setTaskToDelete(task)
+        props.handleShowDeleteModal()
+    }
 
-                {showInput ? 
-                <form onSubmit={handleSubmitEdit} className="grow h-full rounded-l-sm flex" >
-                    <input id="editInput" value={taskEdited.body} onChange={handleChangeInputEdit} onBlur={handleBlurEditInput} className="grow h-full rounded-l-sm text-center" autoFocus /> 
-                    <button type="submit" className="bg-white border-l border-solid border-black px-1"><span className="material-symbols-outlined">done</span></button>
-                </form>
-                : <p className="grow text-center">{task.body}</p>}
+    return (
+            <div className="flex w-3/4 border justify-center border-black border-solid rounded h-auto items-center my-3">
+                <div className="grow break-all">
+                    {showInput ? 
+                    <form onSubmit={handleSubmitEdit} className="grow h-full rounded-l-sm flex" >
+                        <input id="editInput" value={taskEdited.body} onChange={handleChangeInputEdit} onBlur={handleBlurEditInput} className="p-2 w-full grow h-full rounded-l-sm text-center" autoFocus /> 
+                        <button type="submit" className="bg-white border-l border-solid border-black px-1"><span className="material-symbols-outlined">done</span></button>
+                    </form>
+                    : <p className="block flex-wrap text-center p-2 w-full">{task.body}</p>}
+                </div>
                 
-                <div className="flex h-full">
+                <div className="flex h-fit grow-0">
                     <ButtonEdit toggleShowInput={toggleShowInput} />
                     <ButtonDelete 
-                        task={task} 
-                        setTask={setTask} 
-                        tasks={props.tasks}
-                        setTasks={props.setTasks}
+                        handleDeleteTask={handleDeleteTask}
                     />
                 </div>
             </div>
-        );
+        )
 }
 
 export default Task;
