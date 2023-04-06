@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -63,10 +63,14 @@ function Subscribe() {
             navigate("/todolist");
         })
         .catch((error) => {
+            
         })
-      }
+    }
 
-    checkToken();
+    useEffect(() => {
+        checkToken();
+    }, [localStorage.getItem('token')]);
+
     // render
     return (
         <div className="w-full h-screen flex flex-col justify-center items-center">
