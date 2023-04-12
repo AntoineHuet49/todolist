@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import ButtonDelete from "./buttonDelete";
 import ButtonEdit from "./buttonEdit";
 
@@ -23,38 +23,22 @@ function Task(props) {
     const validSpan = useRef();
     const editForm = useRef();
 
-    const editFormulaire = document.getElementById('edit__form')
-
     /**
      * * Function
      */
-    const handleShowInputTrue = () => {
-        setShowInput(true);
-        document.addEventListener('mouseup', handleBlurForm);
-    };
 
-    // useEffect(() => {
-    //     if (showInput) {
-
-
-    //         // editForm.current.addEventListener('blur', handleBlurForm);
-    //     }
-    // }, [showInput]);
-
-    const handleBlurForm = (e) => {
-        console.log(e.target);
-        console.log(validBtn.current);
-
-        if (e.target !== validBtn.current && e.target !== validSpan.current) {
-            setShowInput(false);
-            document.removeEventListener('mouseup', handleBlurForm);
-        }
-    }
-
+    /**
+     * Champs controlé pour l'edition d'une tache
+     * @param {*} e 
+     */
     const handleChangeInputEdit = (e) => {
         setTaskEdited(e.target.value);
     }
 
+    /**
+     * Requete de modification d'une tache
+     * @param {*} e 
+     */
     const handleSubmitEdit = (e) => {
         e.preventDefault();
 
@@ -80,9 +64,36 @@ function Task(props) {
         })
     }
 
+    /**
+     * supression d'une tache
+     * @param {*} e 
+     */
     const handleDeleteTask = (e) => {
         props.setTaskToDelete(task)
         props.handleShowDeleteModal()
+    }
+
+    /**
+     * handle du bouton edit pour montré l'input
+     * ajout d'un event pour blur le form
+     */
+    const handleShowInputTrue = () => {
+        setShowInput(true);
+        document.addEventListener('mouseup', handleBlurForm);
+    };
+
+    /**
+     * lorsque le form pert le focus on cache l'input
+     * @param {*} e 
+     */
+    const handleBlurForm = (e) => {
+        console.log(e.target);
+        console.log(validBtn.current);
+
+        if (e.target !== validBtn.current && e.target !== validSpan.current) {
+            setShowInput(false);
+            document.removeEventListener('mouseup', handleBlurForm);
+        }
     }
 
     return (
