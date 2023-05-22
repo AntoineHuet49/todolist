@@ -44,7 +44,6 @@ function Task(props) {
 
         const taskId = task.id;
 
-
         axios.put(process.env.REACT_APP_API_LINK + '/api/tasks/' + taskId, {
             body: taskEdited,
         },
@@ -87,10 +86,7 @@ function Task(props) {
      * @param {*} e 
      */
     const handleBlurForm = (e) => {
-        console.log(e.target);
-        console.log(validBtn.current);
-
-        if (e.target !== validBtn.current && e.target !== validSpan.current) {
+        if (e.target !== validBtn.current && e.target !== validSpan.current && e.target !== editForm.current) {
             setShowInput(false);
             document.removeEventListener('mouseup', handleBlurForm);
         }
@@ -100,8 +96,8 @@ function Task(props) {
             <div className="flex w-3/4 border justify-center border-black border-solid rounded h-auto items-center my-3">
                 <div className="grow break-all">
                     {showInput ? 
-                    <form id="edit__form" ref={editForm} onSubmit={handleSubmitEdit} className="grow h-full rounded-l-sm flex" >
-                        <input value={taskEdited.body} onChange={handleChangeInputEdit} className="p-2 w-full grow h-full rounded-l-sm text-center" autoFocus /> 
+                    <form id="edit__form" onSubmit={handleSubmitEdit} className="grow h-full rounded-l-sm flex" >
+                        <input ref={editForm} value={taskEdited.body} onChange={handleChangeInputEdit} className="p-2 w-full grow h-full rounded-l-sm text-center" autoFocus /> 
                         <button ref={validBtn} type="submit" className="border-l border-solid border-black px-1"><span ref={validSpan} className="material-symbols-outlined w-full">done</span></button>
                     </form>
                     : <p className="block flex-wrap text-center p-2 w-full">{task.body}</p>}
